@@ -3,23 +3,29 @@ import productModel from "../models/Product";
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const { id, title, price, page, order } = req.query;
+    const { id, title, price, page, order, all } = req.query;
+    let query: any = {};
 
     // ---------------- search by id ---------------//
+    if (!id && !title && !price && !page && !order && !all)
+      return res.status(400).send("Missing parameters");
+
+    if (all === "true") {
+      const all = await productModel.find();
+      return res.status(200).json(all);
+    }
 
     if (id) {
       let result = await productModel.findById(String(id));
       if (!result) return res.status(404).json({ message: "No Product Found" });
       return res.status(200).json(result);
     }
-    let query: any = {};
 
     // -------------------- options --------------------- //
 
-
-    if(title){
-        let  regex : RegExp= new RegExp(String(title), 'i');  
-       query.title = regex ;  
+    if (title) {
+      let regex: RegExp = new RegExp(String(title), "i");
+      query.title = regex;
     }
 
     if (price) query.price = { $lte: price };
