@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 
-
 const RoutesGuide = (req: Request, res: Response) => {
   const routeGuide = {
     get: {
@@ -9,7 +8,7 @@ const RoutesGuide = (req: Request, res: Response) => {
       get_perPage: "/product?page={#page}",
       get_searchByTitle: "/product?title={word}",
       get_searchByPriceOrder: "/product?order={asc or desc}",
-      get_searchByPriceLimit: "/product?price?{price}",
+      get_searchByPriceLimit: "/product?price={price}",
     },
     post: {
       post_product: "/product",
@@ -25,5 +24,4 @@ const RoutesGuide = (req: Request, res: Response) => {
   return res.status(200).json(routeGuide);
 };
 
-
-export default RoutesGuide
+export default RoutesGuide;
