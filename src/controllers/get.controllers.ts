@@ -7,13 +7,8 @@ const getAllProducts = async (req: Request, res: Response) => {
     let query: any = {};
 
     // ---------------- search by id ---------------//
-    if (!id && !title && !price && !page && !order && !all)
-      return res.status(400).send("Missing parameters");
-
-    if (all === "true") {
-      const all = await productModel.find();
-      return res.status(200).json(all);
-    }
+    // if (!id && !title && !price && !page && !order && !all)
+    //   return res.status(400).send("Missing parameters");
 
     if (id) {
       let result = await productModel.findById(String(id));
