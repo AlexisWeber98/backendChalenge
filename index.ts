@@ -5,7 +5,9 @@ import dotenv from "dotenv";
 dotenv.config();
 const database =
   process.env.MONGO_URI ||
+  //  ----------- la conxión está porque fly no leía el .ENV para el deploy ------------//
   "mongodb+srv://Ale:Todoslosfuegoselfuego@mongodatabase.3uheaaw.mongodb.net/";
+// ---------------------------------------------------------------------------------------//
 const port = process.env.PORT || 3000;
 
 mongoose
